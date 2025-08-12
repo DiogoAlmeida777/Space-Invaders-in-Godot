@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://da1onrv0244rt"]
+
+[ext_resource type="Texture2D" uid="uid://chh0wrjsjlwly" path="res://assets/sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="1_exrby"]
+
+[resource]
+atlas = ExtResource("1_exrby")
+region = Rect2(4.94944, 1.01812, 8.04384, 8.0109)

@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=3 uid="uid://btcdfa7ihanrj"]
+
+[ext_resource type="PackedScene" uid="uid://c8doxpc1bkqd6" path="res://Scenes/player.tscn" id="1_8ke8h"]
+[ext_resource type="Script" uid="uid://cn15f3si3odno" path="res://Scripts/main.gd" id="1_imp2a"]
+[ext_resource type="PackedScene" uid="uid://h4dikah4k32r" path="res://Scenes/alien_manager.tscn" id="2_6oadg"]
+[ext_resource type="PackedScene" uid="uid://de3ll5aef007q" path="res://Scenes/space_ship_spawner.tscn" id="4_k5k4v"]
+[ext_resource type="PackedScene" uid="uid://bsysansprd1bo" path="res://Scenes/bunker.tscn" id="5_ppims"]
+[ext_resource type="Script" uid="uid://0nq3lkfdqpra" path="res://Scripts/point_counter.gd" id="6_xtr44"]
+[ext_resource type="PackedScene" uid="uid://bkyytr5l5dydb" path="res://Scenes/ui.tscn" id="7_du5qc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1aqo"]
+size = Vector2(28, 661)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlvk6"]
+size = Vector2(30, 662)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glgca"]
+size = Vector2(1152, 729)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wn8n"]
+size = Vector2(52.75, 658)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvrgr"]
+size = Vector2(67.5, 672)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2s2g"]
+size = Vector2(1312, 128.5)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_imp2a")
+
+[node name="Player" parent="." instance=ExtResource("1_8ke8h")]
+position = Vector2(576, 622)
+
+[node name="PlayerLimits" type="StaticBody2D" parent="."]
+collision_layer = 32
+
+[node name="LeftLimit" type="CollisionShape2D" parent="PlayerLimits"]
+position = Vector2(-14, 321)
+shape = SubResource("RectangleShape2D_v1aqo")
+
+[node name="RightLimit" type="CollisionShape2D" parent="PlayerLimits"]
+position = Vector2(1167, 328)
+shape = SubResource("RectangleShape2D_nlvk6")
+
+[node name="GameArea" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameArea"]
+position = Vector2(576, 314.5)
+shape = SubResource("RectangleShape2D_glgca")
+debug_color = Color(0.897036, 0.0223402, 0.766015, 0.42)
+
+[node name="LeftBound" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBound"]
+position = Vector2(-19.375, 326)
+shape = SubResource("RectangleShape2D_0wn8n")
+debug_color = Color(1.92523e-06, 0.632613, 0.449587, 0.42)
+
+[node name="RightBound" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBound"]
+position = Vector2(1174.75, 322)
+shape = SubResource("RectangleShape2D_rvrgr")
+debug_color = Color(0, 0.639161, 0.368611, 0.42)
+
+[node name="GameOverArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
+position = Vector2(583, 632.25)
+shape = SubResource("RectangleShape2D_r2s2g")
+debug_color = Color(0.997905, 0, 0.155244, 0.42)
+
+[node name="AlienManager" parent="." instance=ExtResource("2_6oadg")]
+
+[node name="SpaceShipSpawner" parent="." instance=ExtResource("4_k5k4v")]
+
+[node name="Bunker" parent="." instance=ExtResource("5_ppims")]
+position = Vector2(216, 544)
+
+[node name="Bunker2" parent="." instance=ExtResource("5_ppims")]
+position = Vector2(472, 544)
+
+[node name="Bunker3" parent="." instance=ExtResource("5_ppims")]
+position = Vector2(680, 544)
+
+[node name="Bunker4" parent="." instance=ExtResource("5_ppims")]
+position = Vector2(936, 544)
+
+[node name="PointCounter" type="Node" parent="."]
+script = ExtResource("6_xtr44")
+
+[node name="UI" parent="." instance=ExtResource("7_du5qc")]
+
+[connection signal="area_entered" from="GameOverArea" to="." method="_on_game_over_area_area_entered"]

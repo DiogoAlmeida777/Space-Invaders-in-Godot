@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Bunker_config" load_steps=7 format=3 uid="uid://khdd3qxl7vvc"]
+
+[ext_resource type="Script" uid="uid://dwqbniq1va2ay" path="res://Resources/bunker_parts/bunker_config.gd" id="1_3nnb6"]
+[ext_resource type="Texture2D" uid="uid://bvybj1mt3uy34" path="res://assets/sprites/bunker_spritesheet.png" id="2_iys2y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y41kp"]
+atlas = ExtResource("2_iys2y")
+region = Rect2(36, 3, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dywr"]
+atlas = ExtResource("2_iys2y")
+region = Rect2(60, 3, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0lx5"]
+atlas = ExtResource("2_iys2y")
+region = Rect2(84, 3, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckdbk"]
+atlas = ExtResource("2_iys2y")
+region = Rect2(60, 27, 8, 8)
+
+[resource]
+script = ExtResource("1_3nnb6")
+sprites = Array[Texture2D]([SubResource("AtlasTexture_y41kp"), SubResource("AtlasTexture_2dywr"), SubResource("AtlasTexture_t0lx5"), SubResource("AtlasTexture_ckdbk")])

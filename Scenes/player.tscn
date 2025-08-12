@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8doxpc1bkqd6"]
+
+[ext_resource type="Script" uid="uid://7ba88su7h1al" path="res://Scripts/player.gd" id="1_6q42q"]
+[ext_resource type="PackedScene" uid="uid://bkg8judci60mk" path="res://Scenes/PlayerBullet.tscn" id="2_5vfvf"]
+[ext_resource type="Texture2D" uid="uid://chh0wrjsjlwly" path="res://assets/sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="2_58ybo"]
+[ext_resource type="AudioStream" uid="uid://c1j5jeb1swqam" path="res://assets/sounds/shoot.wav" id="4_wkwff"]
+[ext_resource type="AudioStream" uid="uid://c5q7ls85dgdg8" path="res://assets/sounds/explosion.wav" id="5_87yln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5wiv"]
+size = Vector2(12, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frc3q"]
+atlas = ExtResource("2_58ybo")
+region = Rect2(19, 49, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvc0v"]
+atlas = ExtResource("2_58ybo")
+region = Rect2(37, 49, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjawa"]
+atlas = ExtResource("2_58ybo")
+region = Rect2(1, 49, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dqxji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frc3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvc0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frc3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvc0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frc3q")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjawa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+collision_mask = 33
+script = ExtResource("1_6q42q")
+bullet = ExtResource("2_5vfvf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_v5wiv")
+
+[node name="ShootingPosition" type="Marker2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0.686275, 0, 1)
+sprite_frames = SubResource("SpriteFrames_dqxji")
+animation = &"idle"
+
+[node name="shootingsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wkwff")
+
+[node name="deathsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_87yln")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

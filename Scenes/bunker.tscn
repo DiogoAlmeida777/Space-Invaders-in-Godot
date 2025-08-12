@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsysansprd1bo"]
+
+[ext_resource type="PackedScene" uid="uid://cxlfh61jwn7h7" path="res://Scenes/bunkerpart.tscn" id="1_hahqs"]
+[ext_resource type="Resource" uid="uid://spe3hi3wk21c" path="res://Resources/bunker_parts/bunker_topleft.tres" id="2_r8lxa"]
+[ext_resource type="Resource" uid="uid://jo8ywm3ucbud" path="res://Resources/bunker_parts/bunker_topcenter.tres" id="3_edrjn"]
+[ext_resource type="Resource" uid="uid://khdd3qxl7vvc" path="res://Resources/bunker_parts/bunker_topright.tres" id="4_edfgl"]
+[ext_resource type="Resource" uid="uid://bxgyb5ycy4omp" path="res://Resources/bunker_parts/bunker_bottomleft.tres" id="5_smo6j"]
+[ext_resource type="Resource" uid="uid://8awgl4tljqcu" path="res://Resources/bunker_parts/bunker_bottomcenter.tres" id="6_86eb0"]
+[ext_resource type="Resource" uid="uid://2u51afk5kjyr" path="res://Resources/bunker_parts/bunker_bottomright.tres" id="7_jxh76"]
+
+[node name="Bunker" type="Node2D"]
+
+[node name="TopLeft" parent="." instance=ExtResource("1_hahqs")]
+position = Vector2(-24, -12)
+config = ExtResource("2_r8lxa")
+
+[node name="TopCenter" parent="." instance=ExtResource("1_hahqs")]
+position = Vector2(3.8147e-06, -12)
+config = ExtResource("3_edrjn")
+
+[node name="TopRight" parent="." instance=ExtResource("1_hahqs")]
+position = Vector2(24, -12)
+config = ExtResource("4_edfgl")
+
+[node name="BottomLeft" parent="." instance=ExtResource("1_hahqs")]
+position = Vector2(-24, 12)
+config = ExtResource("5_smo6j")
+
+[node name="BottomCenter" parent="." instance=ExtResource("1_hahqs")]
+position = Vector2(0, 12)
+config = ExtResource("6_86eb0")
+
+[node name="BottomRight" parent="." instance=ExtResource("1_hahqs")]
+position = Vector2(24, 12)
+config = ExtResource("7_jxh76")

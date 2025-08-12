@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkyytr5l5dydb"]
+
+[ext_resource type="Script" uid="uid://lik0rpfrn63a" path="res://Scripts/ui.gd" id="1_xql7f"]
+[ext_resource type="FontFile" uid="uid://texlu5sixjai" path="res://assets/fonts/retro_computer_personal_use.ttf" id="1_xrr6u"]
+
+[sub_resource type="Animation" id="Animation_nm4ta"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["PRESS ANY KEY TO RESTART!"]
+}
+
+[sub_resource type="Animation" id="Animation_ncytr"]
+resource_name = "blinking_anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["PRESS 'SPACE' TO RESTART!", ""]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_650kr"]
+_data = {
+&"RESET": SubResource("Animation_nm4ta"),
+&"blinking_anim": SubResource("Animation_ncytr")
+}
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_xql7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PointsLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_xrr6u")
+theme_override_font_sizes/font_size = 25
+text = "SCORE: "
+
+[node name="LivesLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_xrr6u")
+theme_override_font_sizes/font_size = 25
+text = "LIVES: "
+
+[node name="GameOver" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_xrr6u")
+theme_override_font_sizes/font_size = 70
+text = "GAME OVER!"
+
+[node name="RestartLabel" type="Label" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_xrr6u")
+theme_override_font_sizes/font_size = 20
+text = "PRESS ANY KEY TO RESTART!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver/VBoxContainer/RestartLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_650kr")
+}

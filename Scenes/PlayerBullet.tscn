@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkg8judci60mk"]
+
+[ext_resource type="Script" uid="uid://0v3ms1gr464e" path="res://Scripts/player_bullet.gd" id="1_ntcvw"]
+[ext_resource type="Texture2D" uid="uid://chh0wrjsjlwly" path="res://assets/sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="2_c40xs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_buj52"]
+size = Vector2(0.666667, 4)
+
+[node name="PlayerBullet" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 4
+collision_mask = 194
+script = ExtResource("1_ntcvw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2.33333)
+texture = ExtResource("2_c40xs")
+region_enabled = true
+region_rect = Rect2(54.9871, 53.0445, 1.01406, 3.96341)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.98682e-08, -2.33333)
+shape = SubResource("RectangleShape2D_buj52")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

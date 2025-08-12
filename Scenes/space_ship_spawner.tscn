@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://de3ll5aef007q"]
+
+[ext_resource type="Script" uid="uid://tgt7tku0j5dm" path="res://Scripts/space_ship_spawner.gd" id="1_1mwod"]
+[ext_resource type="PackedScene" uid="uid://eboa2plfung3" path="res://Scenes/space_ship.tscn" id="2_olae0"]
+
+[node name="SpaceShipSpawner" type="Node2D"]
+script = ExtResource("1_1mwod")
+spaceship = ExtResource("2_olae0")
+
+[node name="SpawnCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="SpawnCooldown" to="." method="_on_spawn_cooldown_timeout"]

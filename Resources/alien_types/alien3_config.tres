@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Aliens_config" load_steps=4 format=3 uid="uid://bln6nwtoijep4"]
+
+[ext_resource type="Script" uid="uid://dyy61r83xy6cc" path="res://Resources/alien_types/aliens_config.gd" id="1_v5276"]
+[ext_resource type="Shape2D" uid="uid://bocnos7ffufhh" path="res://Resources/alien_types/Alien3_2_collision_shape.tres" id="2_m1o1p"]
+[ext_resource type="Texture2D" uid="uid://dhph65hwlje6j" path="res://Resources/alien_types/alien3_sprite.tres" id="3_l86de"]
+
+[resource]
+script = ExtResource("1_v5276")
+sprite = ExtResource("3_l86de")
+shape = ExtResource("2_m1o1p")
+points = 10
+can_shoot = false
+animation = "alien3_movement"

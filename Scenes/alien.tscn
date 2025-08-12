@@ -1,0 +1,155 @@
+[gd_scene load_steps=21 format=3 uid="uid://w2oixqw4830x"]
+
+[ext_resource type="Script" uid="uid://ftnepue7o2il" path="res://Scripts/alien.gd" id="1_utsya"]
+[ext_resource type="Resource" uid="uid://cyw5sc7b7r306" path="res://Resources/alien_types/alien1_config.tres" id="2_j1jra"]
+[ext_resource type="PackedScene" uid="uid://d1h0kflur8wkn" path="res://Scenes/alien_bullet.tscn" id="3_j7dyb"]
+[ext_resource type="Texture2D" uid="uid://da1onrv0244rt" path="res://Resources/alien_types/alien1_sprite.tres" id="3_nie4j"]
+[ext_resource type="Shape2D" uid="uid://cf7pxfcncggvo" path="res://Resources/alien_types/Alien1_collision_shape.tres" id="4_ai2ly"]
+[ext_resource type="Texture2D" uid="uid://chh0wrjsjlwly" path="res://assets/sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="5_tafa6"]
+[ext_resource type="Texture2D" uid="uid://56ds6xxvm524" path="res://Resources/alien_types/alien2_sprite.tres" id="6_hqmfq"]
+[ext_resource type="Texture2D" uid="uid://dhph65hwlje6j" path="res://Resources/alien_types/alien3_sprite.tres" id="7_cmcxl"]
+[ext_resource type="AudioStream" uid="uid://dsrljhvj05wna" path="res://assets/sounds/invaderkilled.wav" id="9_thosl"]
+[ext_resource type="AudioStream" uid="uid://dvn45ahhvf72y" path="res://assets/sounds/fastinvader4.wav" id="13_4d2yc"]
+
+[sub_resource type="Animation" id="Animation_rbnal"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_nie4j")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iod0h"]
+atlas = ExtResource("5_tafa6")
+region = Rect2(4.99344, 10.9946, 8.00855, 8.06667)
+
+[sub_resource type="Animation" id="Animation_ywv0s"]
+resource_name = "alien1_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_nie4j"), SubResource("AtlasTexture_iod0h")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx7bn"]
+atlas = ExtResource("5_tafa6")
+region = Rect2(21.9927, 1.00687, 11.0342, 8.00261)
+
+[sub_resource type="Animation" id="Animation_ikuv5"]
+resource_name = "alien2_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("6_hqmfq"), SubResource("AtlasTexture_wx7bn")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmhyo"]
+atlas = ExtResource("5_tafa6")
+region = Rect2(38.9992, 10.989, 12.0213, 8.00472)
+
+[sub_resource type="Animation" id="Animation_r0df6"]
+resource_name = "alien3_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_cmcxl"), SubResource("AtlasTexture_cmhyo")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jg5c5"]
+atlas = ExtResource("5_tafa6")
+region = Rect2(55.9842, 0.989286, 13.0159, 8.00075)
+
+[sub_resource type="Animation" id="Animation_o1uen"]
+resource_name = "death_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AtlasTexture_jg5c5")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ym3bm"]
+_data = {
+&"RESET": SubResource("Animation_rbnal"),
+&"alien1_movement": SubResource("Animation_ywv0s"),
+&"alien2_movement": SubResource("Animation_ikuv5"),
+&"alien3_movement": SubResource("Animation_r0df6"),
+&"death_animation": SubResource("Animation_o1uen")
+}
+
+[node name="Alien" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_utsya")
+config = ExtResource("2_j1jra")
+alien_bullet = ExtResource("3_j7dyb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.928571, 1)
+texture = ExtResource("3_nie4j")
+region_rect = Rect2(38.8543, 1.07628, 12.1831, 8.22357)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = ExtResource("4_ai2ly")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ym3bm")
+}
+speed_scale = 0.5
+
+[node name="MovingCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="ShootingCooldown" type="Timer" parent="."]
+
+[node name="deathsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_thosl")
+
+[node name="movesound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_4d2yc")
+volume_db = -30.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

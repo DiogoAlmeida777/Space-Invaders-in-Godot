@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://d1h0kflur8wkn"]
+
+[ext_resource type="Texture2D" uid="uid://d4mes10y6sqqf" path="res://Resources/bullet_types/alien_bullet_texture_2.tres" id="1_i3i53"]
+[ext_resource type="Script" uid="uid://c03cjsoahaqyp" path="res://Scripts/alien_bullet.gd" id="1_mol6c"]
+[ext_resource type="Texture2D" uid="uid://chh0wrjsjlwly" path="res://assets/sprites/Arcade - Space Invaders - Game Graphics and Color Overlays.png" id="2_ciuw4"]
+[ext_resource type="Texture2D" uid="uid://chjqwgxt7t4t8" path="res://Resources/bullet_types/alien_bullet_texture_1.tres" id="3_w53tp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sc37d"]
+size = Vector2(2, 6)
+
+[sub_resource type="Animation" id="Animation_fnj1j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_i3i53")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvstd"]
+atlas = ExtResource("2_ciuw4")
+region = Rect2(1, 21, 3, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kaook"]
+atlas = ExtResource("2_ciuw4")
+region = Rect2(11, 21, 3, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t8e0"]
+atlas = ExtResource("2_ciuw4")
+region = Rect2(16, 21, 3, 7)
+
+[sub_resource type="Animation" id="Animation_bat40"]
+resource_name = "bullet_1_anim"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_rvstd"), ExtResource("3_w53tp"), SubResource("AtlasTexture_kaook"), SubResource("AtlasTexture_5t8e0")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7uhi"]
+atlas = ExtResource("2_ciuw4")
+region = Rect2(36, 21, 3, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnth1"]
+atlas = ExtResource("2_ciuw4")
+region = Rect2(26, 21, 3, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbxw2"]
+atlas = ExtResource("2_ciuw4")
+region = Rect2(21, 21, 3, 6)
+
+[sub_resource type="Animation" id="Animation_1flss"]
+resource_name = "bullet_2_anim"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_g7uhi"), ExtResource("1_i3i53"), SubResource("AtlasTexture_fnth1"), SubResource("AtlasTexture_sbxw2")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rn8v"]
+_data = {
+&"RESET": SubResource("Animation_fnj1j"),
+&"bullet_1_anim": SubResource("Animation_bat40"),
+&"bullet_2_anim": SubResource("Animation_1flss")
+}
+
+[node name="AlienBullet" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 193
+script = ExtResource("1_mol6c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_i3i53")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sc37d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2rn8v")
+}
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

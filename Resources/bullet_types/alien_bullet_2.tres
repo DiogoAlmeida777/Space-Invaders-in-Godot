@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Alien_bullet_config" load_steps=3 format=3 uid="uid://byufjb2ugnlev"]
+
+[ext_resource type="Script" uid="uid://dakkjodf6sq81" path="res://Resources/bullet_types/alien_bullet_config.gd" id="1_b6bf3"]
+[ext_resource type="Texture2D" uid="uid://d4mes10y6sqqf" path="res://Resources/bullet_types/alien_bullet_texture_2.tres" id="2_8cnof"]
+
+[resource]
+script = ExtResource("1_b6bf3")
+sprite = ExtResource("2_8cnof")
+animation = "bullet_2_anim"
